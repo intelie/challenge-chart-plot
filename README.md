@@ -67,7 +67,7 @@ We expect you to:
 
 ![alt text](https://github.com/intelie/challenge-chart-plot/raw/master/challenge_frontend.png "Expected user interface")
 
-Although you can choose any graphical library to plot the chart, we suggest that you use a declarative JS framework to build the application, eg. ReactJS.
+Although you can choose any graphical library to plot the chart, we suggest that you use a declarative JS framework to build the application such as ReactJS.
 
 ## Solve this challenge
 
