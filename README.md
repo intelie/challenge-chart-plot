@@ -36,7 +36,9 @@ Example:
 This event defines that the data should be plotted inside the interval between the begin and end values, that is, timestamps 1519780251293 and 1519780260201, respectivelly. All data outside this range may be ignored.
 
 ### stop
-Events of type *stop* define that no more data events will follow. After an event of this type, the chart is still useful for the user, although. Any events that eventually follow a stop event should be ignored, except for a new start, which would restart the process.
+Events of type *stop* define that no more data events will follow.
+A *stop* event is generated after loading a static timespan in the past, or if the user explicitly stops the query. If the chart consumes real time data, it might never be generated.
+Any events that eventually follow a *stop* event should be ignored, except for a new *start*, which would imply the creation of a new chart.
 
 Example:
 ```
@@ -44,7 +46,7 @@ Example:
 ```
 
 ### data
-Events of type *data* define the content that will be displayed on the chart.
+Events of type *data* define the content that might be displayed on the chart.
 
 Example
 ```
