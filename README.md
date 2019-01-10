@@ -24,7 +24,7 @@ Example:
 ```
 {type: 'start', timestamp: 1519780251293, select: ['min_response_time', 'max_response_time'], group: ['os', 'browser']}
 ```
-The above event defines that, for each different value of the pair (os, browser), we may plot two lines: one that represents the minimum response time, and one that represents the maximum response time. That is: if there are two different values for os and two different values for browser, we should have 8 different lines plotted.
+In this example, for each different value of the pair (os, browser), we may plot two lines: one that represents the minimum response time, and one that represents the maximum response time. That is: if there are two different values for os and two different values for browser, we should have 8 different lines plotted.
 
 ### span
 Events of type *span* define what is the visible date range for the chart. A new event of this type may make the chart update its boundaries.
@@ -33,7 +33,7 @@ Example:
 ```
 {type: 'span', timestamp: 1519780251293, begin: 1519780251293, end: 1519780260201}
 ```
-This event defines that the data should be plotted inside the interval between the begin and end values, that is, timestamps 1519780251293 and 1519780260201, respectivelly. All data outside this range may be ignored.
+In this example the data should be plotted inside the interval between the begin and end values, that is, the timestamps 1519780251293 and 1519780260201, respectively. All data outside this range may be ignored.
 
 ### stop
 Events of type *stop* define that no more data events will follow.
