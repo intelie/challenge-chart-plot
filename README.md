@@ -11,6 +11,8 @@ An event is a set of keys and values. For this challenge, it will be represented
 {a: 1, b: 2}
 ```
 
+> Although this is not a strict JSON format, we are being lenient in order to improve readability and facilitate the data input. As there are some backend libraries that support this format, you can implement that support as a bonus.
+
 On our system, each event has two mandatory fields: timestamp and type. All other fields are optional.
 
 * *timestamp* field holds the moment that the event refers to. It is formatted as a regular [Javascript timestamp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime)
