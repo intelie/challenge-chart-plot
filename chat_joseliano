@@ -1,0 +1,173 @@
+<html>
+<head>
+  <title>Joseliano</title>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/2.2.2/js/bootstrap.min.js" charset="utf-8"></script>
+
+	
+	<script src="https://code.highcharts.com/highcharts.js"></script> 
+
+</head>
+<body>
+  <div class="container">
+	<form role="form" id="db-form" nome="db-form"  >
+    	<div class="starter">
+    		<div class="row">
+    			<div class="col-sm-6">
+		    	    <h1>Formulário</h1>
+			        <div class="modal-body">
+		    			
+		    				<div class="form-group-attached">
+		    					<div class="row">
+	    							<div class="form-group col-md-6">
+	    								<label>Browser</label>
+	    								  <select class="form-control" id="frmSelect" required>
+											  <option value="Internet">Internet</option>
+											  <option value="Firefox">Firefox</option>
+											  <option value="Google">Google</option>
+											  <option value="Mozila">Mozila</option>
+											  <option value="Outros">Outros</option>
+											</select>
+	    							</div>
+		    						
+		    					</div>			
+		    					<div class="row">
+									<div class="form-group col-md-4">
+	    								<label>valor Minimo</label>
+	    								<input type="number" name="frmValorMinimo" id="frmValorMinimo" class="form-control" placeholder="Valor Minimo"   required>
+	    							</div>
+	    							<div class="form-group col-md-4">
+	    								<label>valor Máximo</label>
+	    								<input type="number" name="frmValorMaximo" id="frmValorMaximo" class="form-control" placeholder="Valor Máximo"  required>
+	    							</div>									
+		    					</div>
+		    				</div>
+		    				<div class="row">
+		    					<div class="form-group">		    						 
+		    						<button type="button" class="btn btn-primary" onclick="return GerarGRafico()">Salvar</button>  
+
+		    					</div>
+		    				</div>		  
+							
+		    		</div>
+		    	</div>
+		    </div>
+    	</div>	  
+		
+		<div id="grafico" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		</form>
+    </div>    
+
+
+</body>
+</html>
+ <script async type="text/javascript">
+ 
+class GerarGrafico {
+    arSeries = [];
+    chat = Highcharts.chart('grafico', {	 
+		title: {text: 'Desafio'},
+		xAxis: {tickInterval: 1, type: 'logarithmic' },
+		yAxis: {type: 'logarithmic', minorTickInterval: 0.1},
+		tooltip: {headerFormat: '<b>{series.name}</b><br />', pointFormat: 'valor = {point.y}' },   
+		chart: {
+				events: {
+					addSeries: function () {
+						var label = this.renderer.label('Adicionando valor ao grafico ', 100, 120)
+							.attr({
+								fill: Highcharts.getOptions().colors[0],
+								padding: 10,
+								r: 5,
+								zIndex: 8
+							})
+							.css({
+								color: '#FFFFFF'
+							})
+							.add();
+
+							setTimeout(function () {
+								label.fadeOut();
+							}, 100);
+
+					}
+				}
+			} 
+	  });
+    
+   
+  constructor() 
+  { 
+  }
+  
+  set Navegador(value) {     
+    this._navegador = value;
+  }  
+  set valorMinimo(value) {     
+    this._minimo = value;
+  }  
+  set valorMaximo(value) {     
+    this._maximo = value;
+  }
+  
+  Validar() { 
+	 	
+   	if (this._navegador==""){
+	  alert("Informe um Navegador"); 
+	  return false;
+	} 
+  	if (this._minimo==""){
+	  alert("Informe um valor Minimo"); 
+	  return false;
+	}
+	if (this._maximo==""){
+	  alert("Informe um valor máximo"); 
+	  return false;
+	}
+	 
+		
+	this.arSeries.push({
+						data: [ parseInt(this._minimo),   parseInt(this._maximo)], 
+						name: this._navegador
+						} 
+					 );	 	 
+
+	this.addGrafico() 
+ 
+	
+   }
+   
+	addGrafico(){
+ 
+		var seriesLength = this.chat.series.length;
+		for(var i = seriesLength -1; i > -1; i--) {
+            this.chat.series[i].remove();
+        }
+	 
+		for (var i=0;i< this.arSeries.length;i++){ 
+			this.chat.addSeries ({
+									data: this.arSeries[i].data,
+									pointStart: 1,
+									name: this.arSeries[i].name
+								 }
+								)
+		}
+	
+	}
+
+}
+
+let grafico = new GerarGrafico(); 
+
+function GerarGRafico(){	
+	grafico.Navegador=    document.getElementById("frmSelect").value;
+	grafico.valorMinimo=  document.getElementById("frmValorMinimo").value;
+	grafico.valorMaximo=  document.getElementById("frmValorMaximo").value;	
+	return grafico.Validar()
+}
+  
+  
+ 
+ </script>
